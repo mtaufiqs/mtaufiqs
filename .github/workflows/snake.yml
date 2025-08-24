@@ -2,26 +2,43 @@ name: Generate Snake Animation
 
 on:
   schedule:
-    - cron: "0 0 * * *" # jalan tiap jam 00:00 UTC (update harian)
-  workflow_dispatch: # bisa dijalankan manual
+    - cron: "0 0 * * *"   # jalan tiap hari jam 00:00 UTC
+  workflow_dispatch:      # bisa dijalankan manual
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      # Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Generate Snake Animation
+      # Buat branch output jika belum ada
+      - name: Ensure output branch exists
+        run: |
+          git fetch origin
+          if ! git ls-remote --exit-code --heads origin output; then
+            git checkout --orphan output
+            git reset --hard
+            git commit --allow-empty -m "chore: initialize output branch"
+            git push origin output
+            git checkout main || git checkout master
+          fi
+
+      # Jalankan Snake Animation Action
+      - name: Generate snake files
         uses: Platane/snk@v3
         with:
           github_user_name: mtaufiqs
           outputs: |
-            dist/snake-light.svg?palette=github-light
+            dist/snake.svg
             dist/snake-dark.svg?palette=github-dark
+            dist/snake-light.svg?palette=github-light
 
-      - name: Push Snake Animation to output branch
-        uses: crazy-max/ghaction-github-pages@v3
+      # Deploy hasil ke branch output
+      - name: Push to output branch
+        uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: dist
