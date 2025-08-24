@@ -8,7 +8,7 @@
 - Passionate in **Data Science & Machine Learning** 🎯
 - Always exploring **clean code & smart solutions** 💡 
 - Currently learning **Machine Learning & AI applications** 🌱  
-- Reach me: [![Gmail Badge](https://img.shields.io/badge/-Email-D14836?style=flat&logo=Gmail&logoColor=white)](mailto:taufiqurrohman.iam@gmail.com)
+- Reach me: [![Gmail Badge](https://img.shields.io/badge/-Email-D14836?style=flat&logo=Gmail&logoColor=white)](taufiqurrohman.iam@gmail.com)
 
 ### 💻 Language
 <p align="center">
